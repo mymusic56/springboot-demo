@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
@@ -108,12 +109,12 @@ public class MultiDataSourceConfig {
         return new JdbcTemplate(db2DataSource());
     }
 
-    //自定义事务管理器
-    @Bean
-    @Resource
-    public ResourceTransactionManager txManager(DataSource dataSource){
-        return new DataSourceTransactionManager(dataSource);
-    }
+//    //自定义事务管理器
+//    @Bean
+//    @Resource
+//    public ResourceTransactionManager txManager(DataSource dataSource){
+//        return new DataSourceTransactionManager(dataSource);
+//    }
 
 
     //数据初始化
@@ -144,5 +145,21 @@ public class MultiDataSourceConfig {
         dataSourceInitializer.setDatabasePopulator(resourceDatabasePopulator);
         return dataSourceInitializer;
     }
+
+   /* @Bean
+    public DataSourceInitializer db1DataSourceInitializer(@Qualifier("db1DataSource") DataSource dataSource) {
+        System.out.println("----------------初始化内置数据库[db1]----------------------");
+
+        //检测是否已初始化
+
+        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
+        resourceDatabasePopulator.addScript(new ClassPathResource("sql/bar-schema.sql"));
+        resourceDatabasePopulator.addScript(new ClassPathResource("sql/bar-data.sql"));
+
+        DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
+        dataSourceInitializer.setDataSource(dataSource);
+        dataSourceInitializer.setDatabasePopulator(resourceDatabasePopulator);
+        return dataSourceInitializer;
+    }*/
 
 }

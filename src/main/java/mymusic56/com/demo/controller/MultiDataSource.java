@@ -66,7 +66,7 @@ public class MultiDataSource {
     }
 
     private void showData() {
-        jdbcTemplate.queryForList("SELECT * FROM dn_ad")
+        jdbcTemplate.queryForList("SELECT * FROM users")
                 .forEach(row -> log.info("------result:"+row.toString()));
     }
 }
