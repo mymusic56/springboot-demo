@@ -14,12 +14,15 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class,
 		DataSourceTransactionManagerAutoConfiguration.class,
 		JdbcTemplateAutoConfiguration.class,
-		HibernateJpaAutoConfiguration.class
+//		HibernateJpaAutoConfiguration.class
 })
+//@ComponentScan("com")
 @Slf4j
 public class AppApplication {
 	public static void main(String[] args) {
@@ -56,6 +59,16 @@ public class AppApplication {
 			log.info("--------------------------------------------");
 			repository.findByLastName("Bauer").forEach(bauer -> {
 				log.info(bauer.toString());
+			});
+			log.info("Customer found with findByFirstName('Kim'):");
+			log.info("--------------------------------------------");
+			repository.findByFirstName("Kim").forEach(a -> {
+				log.info(a.toString());
+			});
+			log.info("Customer found with findByFirstNameAndLastName('David', 'Palmer'):");
+			log.info("--------------------------------------------");
+			repository.findByFirstNameAndLastName("David", "Palmer").forEach(a -> {
+				log.info(a.toString());
 			});
 			// for (Customer bauer : repository.findByLastName("Bauer")) {
 			//  log.info(bauer.toString());
