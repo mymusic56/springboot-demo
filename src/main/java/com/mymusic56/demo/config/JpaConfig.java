@@ -16,7 +16,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories("com.mymusic56.demo.repository")
+@EnableJpaRepositories("com.mymusic56.demo")
 @EnableTransactionManagement
 @Slf4j
 public class JpaConfig {

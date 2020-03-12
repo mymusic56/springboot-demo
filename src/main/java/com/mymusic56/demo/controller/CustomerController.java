@@ -1,6 +1,7 @@
 package com.mymusic56.demo.controller;
 
 import com.mymusic56.demo.entity.Customer;
+import com.mymusic56.demo.management.UserManagementImpl;
 import com.mymusic56.demo.repository.CustomerRepository;
 import com.mymusic56.demo.repository.CustomerJapRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,9 @@ public class CustomerController {
 
     @Autowired
     CustomerJapRepository customerJpaRepository;
+
+    @Autowired
+    UserManagementImpl userManagement;
 
     @RequestMapping("/index")
     public String index(){
@@ -81,4 +85,10 @@ public class CustomerController {
         return customerJpaRepository.findByEmail(emailAddress);
     }
 
+//    @PostMapping(path = "/saveCustomerAndUser", params = {"first_name","last_name","email"})
+    @RequestMapping(value = "/saveCustomerAndUser", method = RequestMethod.POST)
+    public String saveCustomerAndUser(@RequestParam String first_name, String last_name, String email) throws Exception{
+        userManagement.saveUserAndCustomer(first_name, last_name, email);
+        return "success";
+    }
 }
