@@ -4,6 +4,7 @@ import com.mymusic56.demo.entity.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +36,12 @@ public interface CustomerJapRepository extends JpaRepository<Customer, Long> {
             nativeQuery = true
     )
     Page<Customer> findByLastName(String lastName, Pageable pageable);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "delete from customer where id= ?1", nativeQuery = true)
+    void deleteByCustomerId(Long id);
 
     @Override
     @Transactional

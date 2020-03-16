@@ -91,4 +91,11 @@ public class CustomerController {
         userManagement.saveUserAndCustomer(first_name, last_name, email);
         return "success";
     }
+
+    @PostMapping("deleteById")
+    public String deleteById(@RequestParam String id){
+        Long customerId = Long.valueOf(id);
+        customerJpaRepository.deleteByCustomerId(customerId);
+        return "success";
+    }
 }

@@ -1,2 +1,0 @@
-INSERT INTO FOO (ID, BAR) VALUES (1, 'foo-aaa');
-INSERT INTO FOO (ID, BAR) VALUES (2, 'foo-bbb');
